@@ -65,12 +65,43 @@ app.post('/video',async (req,res)=>{
      
      const link = await getVideo(req.body.link);
     
-     res.send(`<video  controls autoplay>
-              <source src=${link} type="video/mp4">
- 
-              Your browser does not support the video tag.
-            </video>`
-            )
+   
+
+      res.send(`
+        <h1> Select Quality and Download Media from Bottom right Corner </h1>
+
+        <script>
+        var map={'fullHD':'1080p','720p':'720p','480p':'480p','360p':'360p'};
+
+
+          function changeQ(quality){
+               $('source','video#player').attr('src','http://v.com/'+map[quality]);
+                $('span#pp').html(map[quality]);
+               console.log($('source','video#player').attr('src'))
+          }
+        </script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+         
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet"> 
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<div class="dropdown">
+ <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Quality
+ (<span id="pp"></span>)</button>
+ <ul class="dropdown-menu">
+   <li><a href="#" onclick="changeQ('fullHD')">FullHD</a></li>
+   <li><a href="#" onclick="changeQ('720p')">720p</a></li>
+   <li><a href="#" onclick="changeQ('360p')">360p</a></li>
+ </ul>
+</div>
+
+
+<video id="player"  controls autoplay>
+ <source src=${link} type="video/mp4">
+
+</video>
+
+        `)
   
 
     }
