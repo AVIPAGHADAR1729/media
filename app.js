@@ -1,6 +1,5 @@
 const express = require("express");
 const app = express();
-//const bodyParser = require('body-parser');
 
 const cors = require("cors");
 
@@ -14,6 +13,19 @@ const path = require('path');
 
 app.use(express.urlencoded({extended:true}))
 app.use(express.json());
+
+
+
+
+app.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept"
+    );
+    next();
+});
+
 
 
 const getVideo = async url => {
@@ -91,6 +103,7 @@ app.post('/video',async (req,res)=>{
  <ul class="dropdown-menu">
    <li><a href="#" onclick="changeQ('fullHD')">FullHD</a></li>
    <li><a href="#" onclick="changeQ('720p')">720p</a></li>
+   <li><a href="#" onclick="changeQ('480p')">480p</a></li>
    <li><a href="#" onclick="changeQ('360p')">360p</a></li>
  </ul>
 </div>
