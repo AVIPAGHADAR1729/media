@@ -54,7 +54,7 @@ const getImage = async url => {
 
 
 app.get('/',(req,res)=>{
-	res.sendFile(__dirname+"/home.html");
+	res.sendFile(__dirname+"/index.html");
 })
 
 
